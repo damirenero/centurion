@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/legal.css">
 </head>
 <body>
 <style>
@@ -306,7 +307,6 @@ body.lb-open{overflow:hidden}
 .fab-r{right:calc(16px + env(safe-area-inset-right,0px));flex-direction:row-reverse;padding:10px 10px 10px 16px;text-align:right}
 .fab.away{opacity:0;pointer-events:none;transform:translateY(12px)}
 @media (max-width:560px){.fab{padding:6px 12px 6px 6px;font-size:13px}.fab-r{padding:6px 6px 6px 12px}.fab small{display:none}.fab .ic{width:34px;height:34px}}
-footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
 @media (max-width:520px){.letters{grid-template-columns:1fr 1fr}}
 
 /* workers */
@@ -345,17 +345,13 @@ footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
 .form-note{font-size:13px;color:var(--ink-2)}
 @media (max-width:860px){.contact{grid-template-columns:1fr}}
 
-footer{border-top:1px solid var(--rule);padding-block:28px 34px;font-size:13px;color:var(--ink-2)}
-footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between}
-footer .brand .mark{height:28px}
-footer .brand .word{height:11px}
-footer a{color:var(--ink-2)}
 
 .reveal{transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
 .js .reveal.pre{opacity:.001;transform:translateY(24px)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}.js .reveal.pre{opacity:1;transform:none}}
 </style>
 
+<div class="legalbar"><div class="lg-wrap"><span class="lb-org">ООО «Центурион» · ИНН 1660177616</span><a href="/privacy/">Политика обработки персональных данных</a><a href="/consent/">Согласие на обработку персональных данных</a></div></div>
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Центурион — на главную">
@@ -656,11 +652,19 @@ footer a{color:var(--ink-2)}
 </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="Центурион"><img class="mark" src="img/logo-mark.png" alt="" width="225" height="289"><img class="word" src="img/logo-word.png" alt="Центурион" width="1044" height="136"></a>
-    <span>ООО «Центурион» · ИНН 1660177616 · © 2012–<span id="yr">2026</span></span>
-    <span>designed by <a href="https://t.me/damirenero" target="_blank" rel="noopener">@damirenero</a></span>
+<footer class="site-foot">
+  <div class="lg-wrap">
+    <p class="req" style="margin:0">ООО «Центурион», 420049, Республика Татарстан, г. Казань, ул. Шаляпина, д. 12, пом. 4, ИНН 1660177616, ОГРН 1121690083470, тел. <a href="tel:+79272442177">+7 (927) 244-21-77</a>, e-mail: <a href="mailto:centurion.build.co@bk.ru">centurion.build.co@bk.ru</a></p>
+    <nav class="legal-links" aria-label="Документы">
+      <a href="/privacy/">Политика обработки персональных данных</a>
+      <a href="/consent/">Согласие на обработку персональных данных</a>
+      <button type="button" data-cookie-settings>Настройки cookie</button>
+    </nav>
+    <div class="foot-meta">
+      <a class="foot-brand" href="/" aria-label="Центурион — на главную"><img src="/img/logo-mark.png" alt="" width="225" height="289"><img src="/img/logo-word.png" alt="Центурион" width="1044" height="136"></a>
+      <span>© 2012–2026 ООО «Центурион»</span>
+      <span>designed by <a href="https://t.me/damirenero" target="_blank" rel="noopener">@damirenero</a></span>
+    </div>
   </div>
 </footer>
 
@@ -718,6 +722,7 @@ footer a{color:var(--ink-2)}
   <p class="lb-cap" id="lb-cap"></p>
 </div>
 
+<script src="assets/cookie.js" defer></script>
 <script src="https://forms.yandex.ru/_static/embed.js"></script>
 <script>
 /* ===== Контакты: заполните, и они появятся на сайте, а заявки будут уходить на почту ===== */
@@ -727,7 +732,6 @@ document.documentElement.classList.add('js');
 (function(){
   // годы на рынке и год в футере
   const now=new Date(), f=new Date(2012,10,28);
-  document.getElementById('yr').textContent=now.getFullYear();
 
   // логотип возвращает в самое начало страницы
   document.querySelectorAll('a[href="#top"]').forEach(l=>l.addEventListener('click',e=>{
