@@ -114,7 +114,8 @@ p{margin:0}
 .steps span.on{color:var(--ink)}
 .steps span i{font-style:normal;opacity:.5;margin-right:6px}
 .replay{flex:none;background:var(--btn);color:var(--btn-ink);border:0;border-radius:999px;padding:9px 14px;font:500 12px/1 var(--f-mono);cursor:pointer}
-.stage-note{margin-top:10px;font:400 11px/1.4 var(--f-mono);color:var(--ink-2);text-align:right}
+.stage-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transform:scale(1.04);transition:opacity 1.4s ease,transform 2.4s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.stage-frame.photo .stage-photo{opacity:1;transform:none}
 @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.stage{max-width:560px;width:100%;justify-self:center}}
 @media (max-width:440px){.steps{gap:10px}.steps span i{display:none}}
 
@@ -250,10 +251,32 @@ section{scroll-margin-top:80px}
 .social-text{display:grid;gap:18px}
 .letters{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .letter{margin:0;display:grid;gap:10px}
-.letter img{width:100%;aspect-ratio:7/10;object-fit:cover;border-radius:8px;border:1px solid var(--rule);box-shadow:var(--glass-shadow);background:#fff}
+.letter button{all:unset;cursor:zoom-in;display:block;border-radius:8px}
+.letter button:focus-visible{outline:2px solid var(--bp-ink);outline-offset:3px}
+.letter img{transition:transform .3s;width:100%;aspect-ratio:7/10;object-fit:cover;border-radius:8px;border:1px solid var(--rule);box-shadow:var(--glass-shadow);background:#fff}
 .letter figcaption{font-size:13px;color:var(--ink-2)}
 .letter b{display:block;color:var(--ink);font-weight:500}
 @media (max-width:860px){.social{grid-template-columns:1fr}}
+.letter button:hover img{transform:translateY(-4px)}
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(12,14,17,.86);display:grid;place-items:center;padding:max(56px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.lightbox img{max-width:min(92vw,900px);max-height:calc(100vh - 120px);max-height:calc(100dvh - 120px);width:auto;height:auto;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.5);background:#fff}
+.lb-close{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.lb-nav{position:absolute;z-index:2;background:rgba(20,22,26,.6)!important;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer}
+.lb-prev{left:calc(12px + env(safe-area-inset-left,0px))}.lb-next{right:calc(12px + env(safe-area-inset-right,0px))}
+.lb-cap{position:absolute;bottom:calc(10px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#D7DADE;font-size:13px}
+body.lb-open{overflow:hidden}
+
+/* floating CTA */
+.fab{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:80;display:inline-flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:999px;border:1px solid var(--glass-brd);background:var(--glass);-webkit-backdrop-filter:blur(16px) saturate(1.15);backdrop-filter:blur(16px) saturate(1.15);box-shadow:var(--glass-shadow);color:var(--ink);font:500 14px/1.1 var(--f-body);text-decoration:none;cursor:pointer;transition:transform .25s,opacity .3s}
+.fab:hover{transform:translateY(-3px)}
+.fab .ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--btn);color:var(--btn-ink);flex:none}
+.fab .ic svg{width:20px;height:20px}
+.fab small{display:block;font:400 11px/1.2 var(--f-mono);color:var(--ink-2);letter-spacing:.02em}
+.fab-l{left:calc(16px + env(safe-area-inset-left,0px))}
+.fab-r{right:calc(16px + env(safe-area-inset-right,0px));flex-direction:row-reverse;padding:10px 10px 10px 16px;text-align:right}
+.fab.away{opacity:0;pointer-events:none;transform:translateY(12px)}
+@media (max-width:560px){.fab{padding:6px 12px 6px 6px;font-size:13px}.fab-r{padding:6px 6px 6px 12px}.fab small{display:none}.fab .ic{width:34px;height:34px}}
+footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
 @media (max-width:520px){.letters{grid-template-columns:1fr 1fr}}
 
 /* workers */
@@ -354,6 +377,7 @@ footer a{color:var(--ink-2)}
       <div class="stage-glow" aria-hidden="true"></div>
       <div class="stage-frame">
         <svg id="scene" viewBox="0 0 640 720" role="img" aria-label="Анимация: чертёж фасада жилого дома превращается в готовое здание"></svg>
+        <img class="stage-photo" id="stage-photo" src="img/hero-photo.jpg" alt="Готовый жилой дом" width="1024" height="1024">
       </div>
         <div class="stage-bar glass">
           <div class="steps" id="steps">
@@ -363,7 +387,6 @@ footer a{color:var(--ink-2)}
           </div>
           <button class="replay" id="replay" type="button">Повторить</button>
         </div>
-      <p class="stage-note">Иллюстрация: концепт жилого дома</p>
     </div>
   </div>
 </section>
@@ -585,9 +608,9 @@ footer a{color:var(--ink-2)}
       <p class="lead">Поддержка местных инициатив для нас не разовая акция, а часть позиции компании. Помогаем спортивным проектам и автомобильному сообществу Татарстана.</p>
     </div>
     <div class="letters reveal">
-      <figure class="letter"><img src="img/letter-ops.jpg" alt="Благодарственное письмо Союза СРО «ОПС»" loading="lazy"><figcaption><b>Союз СРО «ОПС»</b>Благодарность за участие в программе по популяризации спорта</figcaption></figure>
-      <figure class="letter"><img src="img/letter-ratibor.jpg" alt="Благодарственное письмо бойцовского клуба «Ратибор»" loading="lazy"><figcaption><b>Бойцовский клуб «Ратибор»</b>Спортивный инвентарь для тренировок</figcaption></figure>
-      <figure class="letter"><img src="img/letter-vazhub.jpg" alt="Благодарственная грамота Vazhub" loading="lazy"><figcaption><b>Сообщество Vazhub</b>Спонсор закрытия сезона 2026</figcaption></figure>
+      <figure class="letter"><button type="button" class="lb-open" data-full="img/letter-ops.jpg" aria-label="Открыть документ: Союз СРО «ОПС»"><img src="img/letter-ops.jpg" alt="Благодарственное письмо Союза СРО «ОПС»" loading="lazy"></button><figcaption><b>Союз СРО «ОПС»</b>Благодарность за участие в программе по популяризации спорта</figcaption></figure>
+      <figure class="letter"><button type="button" class="lb-open" data-full="img/letter-ratibor.jpg" aria-label="Открыть документ: Бойцовский клуб «Ратибор»"><img src="img/letter-ratibor.jpg" alt="Благодарственное письмо бойцовского клуба «Ратибор»" loading="lazy"></button><figcaption><b>Бойцовский клуб «Ратибор»</b>Спортивный инвентарь для тренировок</figcaption></figure>
+      <figure class="letter"><button type="button" class="lb-open" data-full="img/letter-vazhub.jpg" aria-label="Открыть документ: Сообщество Vazhub"><img src="img/letter-vazhub.jpg" alt="Благодарственная грамота Vazhub" loading="lazy"></button><figcaption><b>Сообщество Vazhub</b>Спонсор закрытия сезона 2026</figcaption></figure>
     </div>
   </div>
 </section>
@@ -633,6 +656,23 @@ footer a{color:var(--ink-2)}
     <span>designed by <a href="https://t.me/damirenero" target="_blank" rel="noopener">@damirenero</a></span>
   </div>
 </footer>
+
+<a class="fab fab-l away" href="#contacts" data-topic="client" aria-label="Заказчикам: оставить заявку">
+  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6M9 10h.01M15 10h.01"/></svg></span>
+  <span>Заказчикам<small>обсудить объект</small></span>
+</a>
+<a class="fab fab-r away" href="#contacts" data-topic="job" aria-label="Соискателям: откликнуться на вакансию">
+  <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M2.5 15h19v2.5h-19z"/><path d="M10 7.2V5h4v2.2"/></svg></span>
+  <span>Соискателям<small>работа на объектах</small></span>
+</a>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Просмотр документа">
+  <button class="lb-close" id="lb-close" type="button" aria-label="Закрыть">×</button>
+  <button class="lb-nav lb-prev" id="lb-prev" type="button" aria-label="Предыдущий">‹</button>
+  <img id="lb-img" alt="">
+  <button class="lb-nav lb-next" id="lb-next" type="button" aria-label="Следующий">›</button>
+  <p class="lb-cap" id="lb-cap"></p>
+</div>
 
 <script>
 /* ===== Контакты: заполните, и они появятся на сайте, а заявки будут уходить на почту ===== */
@@ -681,6 +721,27 @@ document.documentElement.classList.add('js');
       st.textContent='Приём заявок с сайта настраивается. Пока приходите в офис: ул. Спартаковская, 2, офис 343.';
     }
   });
+
+  // просмотр грамот
+  const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lb-img'), lbCap=document.getElementById('lb-cap');
+  const docs=[...document.querySelectorAll('.lb-open')]; let cur=0, lastFocus=null;
+  function show(i){cur=(i+docs.length)%docs.length;const b=docs[cur];lbImg.src=b.dataset.full;lbImg.alt=b.querySelector('img').alt;lbCap.textContent=b.querySelector('img').alt}
+  function openLb(i){lastFocus=document.activeElement;show(i);lb.hidden=false;document.body.classList.add('lb-open');document.getElementById('lb-close').focus()}
+  function closeLb(){lb.hidden=true;document.body.classList.remove('lb-open');lastFocus&&lastFocus.focus()}
+  docs.forEach((b,i)=>b.addEventListener('click',()=>openLb(i)));
+  document.getElementById('lb-close').addEventListener('click',closeLb);
+  document.getElementById('lb-prev').addEventListener('click',e=>{e.stopPropagation();show(cur-1)});
+  document.getElementById('lb-next').addEventListener('click',e=>{e.stopPropagation();show(cur+1)});
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
+  document.addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
+
+  // плавающие кнопки прячутся, когда открыт блок контактов
+  if('IntersectionObserver' in window){
+    const fabs=document.querySelectorAll('.fab'); let inHero=true, inContacts=false;
+    const upd=()=>fabs.forEach(f=>f.classList.toggle('away',inHero||inContacts));
+    new IntersectionObserver(([e])=>{inContacts=e.isIntersecting;upd()},{threshold:.15}).observe(document.getElementById('contacts'));
+    new IntersectionObserver(([e])=>{inHero=e.isIntersecting;upd()},{threshold:.45}).observe(document.querySelector('.hero'));
+  }
 
   // появление блоков (исходно всё видно; прячем только то, что ниже экрана)
   if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
@@ -898,7 +959,8 @@ document.documentElement.classList.add('js');
   const steps=[...document.querySelectorAll('#steps span')];
   const setStep=i=>steps.forEach((s,k)=>s.classList.toggle('on',k===i));
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let timers=[],raf=0,visible=true,running=false;
+  let timers=[],raf=0;
+  const frame=svg.parentElement;
   const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
   function setScan(y){
     cr.setAttribute('y',y);cr.setAttribute('height',H-y);
@@ -909,11 +971,11 @@ document.documentElement.classList.add('js');
     const m=Math.max(0,(GROUND-y)/ (GROUND-ROOF) * 50.4);
     scanTag.textContent='+'+m.toFixed(3);
   }
-  function finalState(){svg.classList.add('draw','lit');svg.classList.remove('scanning','reset');setScan(0);setStep(2)}
-  function blueprintState(){svg.classList.add('draw');svg.classList.remove('lit','scanning','reset');setScan(H);setStep(0)}
+  function finalState(){svg.classList.add('draw','lit');svg.classList.remove('scanning','reset');setScan(0);frame.classList.add('photo');setStep(2)}
+  function blueprintState(){svg.classList.add('draw');svg.classList.remove('lit','scanning','reset');setScan(H);frame.classList.remove('photo');setStep(0)}
   function run(){
-    timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf);running=true;
-    svg.classList.add('reset');
+    timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf);
+    svg.classList.add('reset');frame.classList.remove('photo');
     later(()=>{
       svg.classList.remove('draw','lit','scanning');setScan(H);setStep(0);
       void svg.getBoundingClientRect();
@@ -927,8 +989,8 @@ document.documentElement.classList.add('js');
         let p=Math.min(1,(now-t0)/dur); p=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
         setScan(from+(to-from)*p);
         if(p<1)raf=requestAnimationFrame(tick);
-        else{svg.classList.remove('scanning');svg.classList.add('lit');setStep(2);
-          later(()=>{running=false;if(visible)run()},7000)}
+        else{svg.classList.remove('scanning');svg.classList.add('lit');
+          later(()=>{frame.classList.add('photo');setStep(2)},1600)}
       };
       raf=requestAnimationFrame(tick);
     },450+3400);
@@ -937,12 +999,11 @@ document.documentElement.classList.add('js');
     if(reduced){svg.classList.contains('lit')?blueprintState():finalState();return}
     run();
   });
-  if(reduced){finalState();document.getElementById('replay').textContent='Чертёж / объект';return}
-  // пауза, когда герой вне экрана
+  if(reduced){finalState();document.getElementById('replay').textContent='Чертёж / фото';return}
+  // запускаем один раз, когда анимация появилась на экране
   if('IntersectionObserver' in window){
-    new IntersectionObserver(([e])=>{visible=e.isIntersecting;if(visible&&!running)run()}).observe(svg);
-  }
-  run();
+    const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){io.disconnect();run()}});io.observe(svg);
+  } else run();
 })();
 </script>
 </body>
