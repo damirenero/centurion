@@ -147,13 +147,13 @@ p{margin:0}
 .stats .wrap{position:relative;display:grid;gap:22px}
 .stats-head{padding:22px 26px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;align-items:baseline}
 .stats-head h2{font-size:clamp(24px,2.6vw,34px)}
-.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stat{padding:24px 24px 22px;display:grid;gap:8px;align-content:start}
 .stat .num{font:300 clamp(44px,5vw,64px)/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .stat .num small{font-size:.42em;font-weight:400;margin-left:6px;letter-spacing:0}
 .stat .cap{font-weight:500}
 .stat .sub{font-size:14px;color:var(--ink-2)}
-@media (max-width:900px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){.stat-grid{grid-template-columns:1fr}}
 @media (max-width:460px){.stat-grid{grid-template-columns:1fr}}
 
 /* ---------- sections ---------- */
@@ -176,7 +176,7 @@ section{scroll-margin-top:80px}
 @media (max-width:860px){.about{grid-template-columns:1fr}.about-img{min-height:300px}}
 
 /* directions */
-.dirs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--rule)}
+.dirs{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--rule)}
 .dir{padding:26px 22px 30px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:grid;gap:12px;align-content:start;position:relative;transition:background .25s}
 .dir:hover{background:var(--bg-2)}
 .dir .code{font:500 11px/1 var(--f-mono);color:var(--ink-2);letter-spacing:.08em}
@@ -189,11 +189,11 @@ section{scroll-margin-top:80px}
 
 /* clients */
 .clients{background:var(--bg-2);border-block:1px solid var(--rule)}
-.sys{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sys{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .sys-card{padding:24px;border:1px solid var(--rule);border-radius:var(--r);background:var(--bg);display:grid;gap:10px;align-content:start}
 .sys-card .k{font:500 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--bp-ink)}
 .sys-card p{font-size:14.5px;color:var(--ink-2)}
-@media (max-width:960px){.sys{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:1060px){.sys{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.sys{grid-template-columns:1fr}}
 .process{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:st}
 .process li{list-style:none;padding:20px 18px 0 0;border-top:1px solid var(--line);position:relative;display:grid;gap:8px;align-content:start}
@@ -270,6 +270,32 @@ section{scroll-margin-top:80px}
 .lb-cap{position:absolute;bottom:calc(10px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#D7DADE;font-size:13px}
 body.lb-open{overflow:hidden}
 
+/* jobs modal */
+.jobs{position:fixed;inset:0;z-index:150;background:var(--bg);overflow-y:auto;overscroll-behavior:contain;animation:jobsIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes jobsIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.jobs-top{position:sticky;top:0;z-index:2;background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding-top:env(safe-area-inset-top,0px)}
+.jobs-top .wrap{display:flex;align-items:center;gap:16px;height:64px}
+.jobs-top .brand .mark{height:32px}.jobs-top .brand .word{height:13px}
+.jobs-close{margin-left:auto;display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--rule);border-radius:999px;padding:10px 16px;color:var(--ink);font:500 14px/1 var(--f-body);cursor:pointer}
+.jobs-body{padding-block:clamp(36px,5vw,64px) calc(56px + env(safe-area-inset-bottom,0px));display:grid;gap:clamp(36px,4vw,56px)}
+.jobs-body h2{font-size:clamp(34px,4.6vw,58px)}
+.offer{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.offer div{padding:20px;border:1px solid var(--rule);border-radius:var(--r);background:var(--bg-2);display:grid;gap:6px;align-content:start}
+.offer b{font:500 17px/1.25 var(--f-display)}
+.offer span{font-size:14px;color:var(--ink-2)}
+@media (max-width:960px){.offer{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.offer{grid-template-columns:1fr}}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.role-g{padding:20px 20px 22px 0;border-bottom:1px solid var(--rule);display:grid;gap:12px;align-content:start}
+.role-g .eyebrow{font-size:11px}
+.role-g div{display:flex;flex-wrap:wrap;gap:8px}
+.role{font:500 14px/1 var(--f-body);padding:11px 14px;border-radius:999px;border:1px solid var(--rule);background:var(--bg-2);color:var(--ink);cursor:pointer;transition:background .2s,color .2s}
+.role[aria-pressed="true"]{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+@media (max-width:860px){.roles{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.roles{grid-template-columns:1fr}}
+.jobs-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+.jobs-cta p{font-size:14px;color:var(--ink-2);max-width:46ch}
+
 /* floating CTA */
 .fab{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:80;display:inline-flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:999px;border:1px solid var(--glass-brd);background:var(--glass);-webkit-backdrop-filter:blur(16px) saturate(1.15);backdrop-filter:blur(16px) saturate(1.15);box-shadow:var(--glass-shadow);color:var(--ink);font:500 14px/1.1 var(--f-body);text-decoration:none;cursor:pointer;transition:transform .25s,opacity .3s}
 .fab:hover{transform:translateY(-3px)}
@@ -293,8 +319,6 @@ footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
 .work-item h3{color:#F2F3F4;margin-bottom:6px}
 .work-item p{font-size:14.5px;color:#A6ABB2}
 @media (max-width:760px){.work-grid{grid-template-columns:1fr}}
-.vacancies{margin-top:40px;display:grid;gap:16px;position:relative}
-.vac-list{display:flex;flex-wrap:wrap;gap:8px}
 .vac{font:500 13px/1 var(--f-body);padding:11px 14px;border-radius:999px;border:1px solid rgba(233,234,236,.25);color:#E9EAEC}
 .workers .btn-solid{background:#E9EAEC;color:#1D2024;border-color:#E9EAEC}
 .workers .btn-ghost{color:#E9EAEC;border-color:rgba(233,234,236,.4)}
@@ -363,17 +387,11 @@ footer a{color:var(--ink-2)}
     <div class="hero-copy">
       <p class="eyebrow">Строительно-монтажная компания · Казань · с 2012 года</p>
       <h1>Строим будущее, <b>создаем ценности!</b></h1>
-      <p class="lead">Подрядчик для жилого, коммерческого и инфраструктурного строительства. Монолит, кладка, кровля, гидроизоляция, инженерные сети и отделка — восемь направлений работ в одном контуре ответственности.</p>
+      <p class="lead">Подрядчик для жилого, коммерческого и инфраструктурного строительства. Монолит, кладка, кровля, гидроизоляция, отделка и проектирование — шесть направлений работ в одном контуре ответственности.</p>
       <div class="hero-cta">
         <a class="btn btn-solid" href="#clients">Заказчикам
           <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
         <a class="btn btn-ghost" href="#workers">Работа на объектах</a>
-      </div>
-      <div class="hero-facts">
-        <span class="chip">СРО · лимит 100 млн ₽</span>
-        <span class="chip">ОСНО / НДС</span>
-        <span class="chip">Новый объект: ЖК «Сердце мира»</span>
-        <span class="chip">235 человек в штате</span>
       </div>
     </div>
 
@@ -405,10 +423,9 @@ footer a{color:var(--ink-2)}
       <p class="eyebrow">Основана 28 ноября 2012 года</p>
     </div>
     <div class="stat-grid">
-      <div class="stat glass"><div class="num"><span id="years">13</span><small>лет</small></div><div class="cap">на строительном рынке</div><div class="sub">Работаем с девелоперами Казани и Татарстана</div></div>
-      <div class="stat glass"><div class="num">235</div><div class="cap">человек в штате</div><div class="sub">10 ИТР, 5 офисных сотрудников, 220 рабочих</div></div>
-      <div class="stat glass"><div class="num">8</div><div class="cap">направлений работ</div><div class="sub">Один подрядчик закрывает критичные разделы стройки</div></div>
-      <div class="stat glass"><div class="num">100<small>млн ₽</small></div><div class="cap">лимит по СРО</div><div class="sub">Допуск к проектам со значительными объёмами</div></div>
+      <div class="stat glass"><div class="num">2012</div><div class="cap">строим с 2012 года</div><div class="sub">Работаем с девелоперами Казани и Татарстана</div></div>
+      <div class="stat glass"><div class="num">200+</div><div class="cap">человек на объектах</div><div class="sub">Рабочие профильных бригад под контролем ИТР</div></div>
+      <div class="stat glass"><div class="num">6</div><div class="cap">направлений работ</div><div class="sub">Один подрядчик закрывает критичные разделы стройки</div></div>
     </div>
   </div>
 </section>
@@ -428,8 +445,8 @@ footer a{color:var(--ink-2)}
       <p>Собственный штат позволяет оперативно распределять ресурсы и контролировать качество и сроки на каждом этапе строительства.</p>
       <div class="team">
         <div><b>10</b><span>инженерно-технических специалистов</span></div>
-        <div><b>5</b><span>офисных сотрудников</span></div>
-        <div><b>220</b><span>рабочих на объектах</span></div>
+        <div><b>6</b><span>направлений работ</span></div>
+        <div><b>200+</b><span>человек на объектах</span></div>
       </div>
     </div>
   </div>
@@ -444,14 +461,12 @@ footer a{color:var(--ink-2)}
       <p class="lead">Каждое направление ведёт профильная бригада под контролем ИТР. Заказчику не нужно собирать субподрядчиков по разделам и стыковать их на площадке.</p>
     </div>
     <div class="dirs">
-      <article class="dir"><span class="code">КЖ</span><h3>Монолитные работы</h3><p>Бетонные и железобетонные конструкции: фундаменты, плиты, стены, колонны.</p><ul><li>опалубка</li><li>армирование</li><li>бетонирование</li></ul></article>
-      <article class="dir"><span class="code">КР / АР</span><h3>Кирпичная кладка</h3><p>Стеновые несущие и самонесущие конструкции, облицовочная кладка.</p><ul><li>несущие стены</li><li>самонесущие стены</li></ul></article>
-      <article class="dir"><span class="code">КР</span><h3>Кровельные работы</h3><p>Устройство и ремонт кровли любой сложности.</p><ul><li>устройство</li><li>ремонт</li><li>примыкания</li></ul></article>
-      <article class="dir"><span class="code">ГИ</span><h3>Гидроизоляция</h3><p>Защита конструкций и узлов от воды и влаги.</p><ul><li>конструкции</li><li>узлы</li></ul></article>
-      <article class="dir"><span class="code">ЭОМ</span><h3>Электрика</h3><p>Внутренние электрические сети и подключение.</p><ul><li>внутренние сети</li><li>подключение</li></ul></article>
-      <article class="dir"><span class="code">СС</span><h3>Слаботочные системы</h3><p>Структурированные кабельные сети, связь, системы безопасности, домофония.</p><ul><li>СКС</li><li>связь</li><li>безопасность</li><li>домофония</li></ul></article>
-      <article class="dir"><span class="code">ОТД</span><h3>Отделочные работы</h3><p>Черновая, предчистовая и чистовая отделка квартир и мест общего пользования.</p><ul><li>квартиры</li><li>МОП</li><li>входные группы</li></ul></article>
-      <article class="dir"><span class="code">ПД</span><h3>Проектные работы</h3><p>Проекты индивидуальных жилых домов и дизайн-проекты интерьеров.</p><ul><li>ИЖС</li><li>дизайн-проекты</li></ul></article>
+      <article class="dir"><h3>Монолитные работы</h3><p>Бетонные и железобетонные конструкции: фундаменты, плиты, стены, колонны.</p><ul><li>опалубка</li><li>армирование</li><li>бетонирование</li></ul></article>
+      <article class="dir"><h3>Кирпичная кладка</h3><p>Стеновые несущие и самонесущие конструкции, облицовочная кладка.</p><ul><li>несущие стены</li><li>самонесущие стены</li></ul></article>
+      <article class="dir"><h3>Кровельные работы</h3><p>Устройство и ремонт кровли любой сложности.</p><ul><li>устройство</li><li>ремонт</li><li>примыкания</li></ul></article>
+      <article class="dir"><h3>Гидроизоляция</h3><p>Защита конструкций и узлов от воды и влаги.</p><ul><li>конструкции</li><li>узлы</li></ul></article>
+      <article class="dir"><h3>Отделочные работы</h3><p>Черновая, предчистовая и чистовая отделка квартир и мест общего пользования.</p><ul><li>квартиры</li><li>МОП</li><li>входные группы</li></ul></article>
+      <article class="dir"><h3>Проектные работы</h3><p>Проекты индивидуальных жилых домов и дизайн-проекты интерьеров.</p><ul><li>ИЖС</li><li>дизайн-проекты</li></ul></article>
     </div>
     <p class="dirs-foot">Все работы — в одном контуре ответственности.</p>
   </div>
@@ -466,11 +481,9 @@ footer a{color:var(--ink-2)}
       <p class="lead">Работаем с девелоперами, застройщиками, генподрядчиками и техническими заказчиками. Работа с нами снижает организационную нагрузку: меньше точек контроля, быстрее решаются вопросы на площадке.</p>
     </div>
     <div class="sys">
-      <div class="sys-card"><span class="k">Ответственность</span><h3>1 подрядчик — 8 направлений</h3><p>Один договор и одна зона ответственности вместо нескольких субподрядчиков по разделам.</p></div>
+      <div class="sys-card"><span class="k">Ответственность</span><h3>1 подрядчик — 6 направлений</h3><p>Один договор и одна зона ответственности вместо нескольких субподрядчиков по разделам.</p></div>
       <div class="sys-card"><span class="k">Документы</span><h3>Документооборот и ПТО</h3><p>Ведём документооборот, готовим исполнительную документацию для технического надзора.</p></div>
       <div class="sys-card"><span class="k">Сроки</span><h3>Соблюдение ГПР объекта</h3><p>Встраиваемся в график производства работ и взаимодействуем с технадзором, проектировщиками и смежными подрядчиками.</p></div>
-      <div class="sys-card"><span class="k">Допуски</span><h3>СРО с лимитом 100 млн ₽</h3><p>Участвуем в проектах со значительными объёмами работ и ответственностью перед заказчиком.</p></div>
-      <div class="sys-card"><span class="k">Финансы</span><h3>ОСНО и НДС</h3><p>Официальный формат работы, полный пакет реквизитов, прозрачные договорные отношения. Подходим для базы подрядчиков крупных заказчиков.</p></div>
       <div class="sys-card"><span class="k">Безопасность</span><h3>Опыт на режимных объектах</h3><p>Демонтаж старого терминала аэропорта Казани: ограниченный доступ, требования безопасности, строгий график. Документы по работам предоставляем по запросу в рамках предквалификации.</p></div>
     </div>
 
@@ -585,21 +598,16 @@ footer a{color:var(--ink-2)}
       </div>
       <div class="work-item">
         <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="6" y="4" width="18" height="22" rx="1.5"/><path d="M10 10h10M10 14h10M10 18h6"/></svg>
-        <div><h3>Официальная работа</h3><p>Компания на ОСНО, работает по договорам с 2012 года. Собственный штат — 235 человек.</p></div>
+        <div><h3>Официальная работа</h3><p>Работаем по договорам с 2012 года. Более 200 человек на объектах.</p></div>
       </div>
       <div class="work-item">
         <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 20l6-6 4 4 9-9"/><path d="M18 9h6v6"/></svg>
-        <div><h3>Рост внутри компании</h3><p>Восемь направлений работ — можно осваивать смежные специальности и переходить на позиции мастера и ИТР.</p></div>
+        <div><h3>Рост внутри компании</h3><p>Шесть направлений работ — можно осваивать смежные специальности и переходить на позиции мастера и ИТР.</p></div>
       </div>
     </div>
-    <div class="vacancies">
-      <p class="eyebrow">Кого ищем</p>
-      <div class="vac-list">
-        <span class="vac">Бетонщик</span><span class="vac">Арматурщик</span><span class="vac">Монтажник опалубки</span><span class="vac">Каменщик</span><span class="vac">Кровельщик</span><span class="vac">Гидроизолировщик</span><span class="vac">Электромонтажник</span><span class="vac">Монтажник слаботочных систем</span><span class="vac">Отделочник</span><span class="vac">Демонтажник</span><span class="vac">Мастер СМР</span><span class="vac">Инженер ПТО</span>
-      </div>
-      <div class="hero-cta" style="margin-top:10px">
-        <a class="btn btn-solid" href="#contacts" data-topic="job">Откликнуться</a>
-      </div>
+    <div class="hero-cta" style="margin-top:36px">
+      <button class="btn btn-solid" type="button" data-jobs>Смотреть вакансии</button>
+    </div>
     </div>
   </div>
 </section>
@@ -666,10 +674,47 @@ footer a{color:var(--ink-2)}
   <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6M9 10h.01M15 10h.01"/></svg></span>
   <span>Заказчикам<small>обсудить объект</small></span>
 </a>
-<a class="fab fab-r" href="#contacts" data-topic="job" aria-label="Соискателям: откликнуться на вакансию">
+<a class="fab fab-r" href="#jobs" data-jobs aria-label="Соискателям: вакансии">
   <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M2.5 15h19v2.5h-19z"/><path d="M10 7.2V5h4v2.2"/></svg></span>
   <span>Соискателям<small>работа на объектах</small></span>
 </a>
+
+<div class="jobs" id="jobs" hidden role="dialog" aria-modal="true" aria-labelledby="jobs-h">
+  <div class="jobs-top"><div class="wrap">
+    <span class="brand"><img class="mark" src="img/logo-mark.png" alt="" width="225" height="289"><img class="word" src="img/logo-word.png" alt="Центурион" width="1044" height="136"></span>
+    <button class="jobs-close" id="jobs-close" type="button">Закрыть <span aria-hidden="true">×</span></button>
+  </div></div>
+  <div class="wrap jobs-body">
+    <div style="display:grid;gap:18px">
+      <p class="eyebrow">Соискателям</p>
+      <h2 id="jobs-h">Вакансии на объектах «Центуриона»</h2>
+      <p class="lead">Набираем специалистов в штат на жилые комплексы и коммерческие объекты Казани. Работа по проекту и ППР, объём и сроки известны до начала работ.</p>
+    </div>
+    <div class="offer">
+      <div><b>Понятные задачи</b><span>Захватка, объём и сроки фиксируются до выхода на объект</span></div>
+      <div><b>Крупные объекты</b><span>ЖК ведущих застройщиков Татарстана, загрузка на месяцы вперёд</span></div>
+      <div><b>ИТР на площадке</b><span>Прораб и мастер решают технические вопросы на месте</span></div>
+      <div><b>Официально</b><span>Работаем по договорам с 2012 года</span></div>
+    </div>
+    <div style="display:grid;gap:18px">
+      <h3 style="font-size:clamp(22px,2.4vw,30px);font-weight:400">Кого ищем</h3>
+      <p class="form-note" style="margin-top:-8px">Отметьте специальность, она подставится в заявку.</p>
+      <div class="roles">
+        <div class="role-g"><span class="eyebrow">Монолит</span><div><button class="role" type="button" aria-pressed="false">Бетонщик</button><button class="role" type="button" aria-pressed="false">Арматурщик</button><button class="role" type="button" aria-pressed="false">Монтажник опалубки</button></div></div>
+        <div class="role-g"><span class="eyebrow">Кладка</span><div><button class="role" type="button" aria-pressed="false">Каменщик</button></div></div>
+        <div class="role-g"><span class="eyebrow">Кровля и гидроизоляция</span><div><button class="role" type="button" aria-pressed="false">Кровельщик</button><button class="role" type="button" aria-pressed="false">Гидроизолировщик</button></div></div>
+        <div class="role-g"><span class="eyebrow">Отделка</span><div><button class="role" type="button" aria-pressed="false">Отделочник</button></div></div>
+        <div class="role-g"><span class="eyebrow">Демонтаж</span><div><button class="role" type="button" aria-pressed="false">Демонтажник</button></div></div>
+        <div class="role-g"><span class="eyebrow">ИТР</span><div><button class="role" type="button" aria-pressed="false">Мастер СМР</button><button class="role" type="button" aria-pressed="false">Инженер ПТО</button></div></div>
+      </div>
+    </div>
+    <div class="jobs-cta">
+      <button class="btn btn-solid" id="jobs-apply" type="button">Оставить заявку как соискатель
+        <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+      <p>Откроется форма на главной странице. Перезвоним и пригласим на собеседование.</p>
+    </div>
+  </div>
+</div>
 
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Просмотр документа">
   <button class="lb-close" id="lb-close" type="button" aria-label="Закрыть">×</button>
@@ -687,8 +732,6 @@ document.documentElement.classList.add('js');
 (function(){
   // годы на рынке и год в футере
   const now=new Date(), f=new Date(2012,10,28);
-  let y=now.getFullYear()-f.getFullYear(); if(now<new Date(now.getFullYear(),10,28)) y--;
-  document.getElementById('years').textContent=y;
   document.getElementById('yr').textContent=now.getFullYear();
 
   // логотип возвращает в самое начало страницы
@@ -734,6 +777,23 @@ document.documentElement.classList.add('js');
       st.textContent='Приём заявок с сайта настраивается. Пока приходите в офис: ул. Спартаковская, 2, офис 343.';
     }
   });
+
+  // всплывающая страница вакансий
+  const jobs=document.getElementById('jobs'); let jobsFrom=null;
+  function openJobs(e){if(e)e.preventDefault();jobsFrom=document.activeElement;jobs.hidden=false;jobs.scrollTop=0;document.body.classList.add('lb-open');document.getElementById('jobs-close').focus()}
+  function closeJobs(){jobs.hidden=true;document.body.classList.remove('lb-open')}
+  document.querySelectorAll('[data-jobs]').forEach(x=>x.addEventListener('click',openJobs));
+  document.getElementById('jobs-close').addEventListener('click',()=>{closeJobs();jobsFrom&&jobsFrom.focus()});
+  document.addEventListener('keydown',e=>{if(!jobs.hidden&&e.key==='Escape'){closeJobs();jobsFrom&&jobsFrom.focus()}});
+  jobs.querySelectorAll('.role').forEach(r=>r.addEventListener('click',()=>r.setAttribute('aria-pressed',r.getAttribute('aria-pressed')!=='true')));
+  document.getElementById('jobs-apply').addEventListener('click',()=>{
+    const picked=[...jobs.querySelectorAll('.role[aria-pressed="true"]')].map(r=>r.textContent);
+    closeJobs();setTopic('job');
+    if(picked.length){msg.value='Специальность: '+picked.join(', ')+'\nОпыт: '}
+    document.getElementById('contacts').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    setTimeout(()=>document.getElementById('f-name').focus({preventScroll:true}),700);
+  });
+  if(location.hash==='#jobs')openJobs();
 
   // просмотр грамот
   const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lb-img'), lbCap=document.getElementById('lb-cap');
