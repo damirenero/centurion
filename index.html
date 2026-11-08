@@ -237,8 +237,8 @@ section{scroll-margin-top:80px}
 .tlink{font-size:14px;color:var(--ink-2)}
 @media (max-width:860px){.feature{grid-template-columns:1fr}.feature-img{min-height:300px}}
 .keys{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:clamp(48px,6vw,80px)}
-.key{border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;background:var(--bg);display:grid;grid-template-columns:200px 1fr;min-width:0}
-.key-img{position:relative;min-height:220px;background:var(--bp-paper) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path d='M16 0H0V16' fill='none' stroke='%232F5F92' stroke-opacity='.14'/></svg>")}
+.key{border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;background:var(--bg);display:grid;grid-template-rows:auto 1fr;min-width:0}
+.key-img{position:relative;aspect-ratio:16/9;max-width:100%;background:var(--bp-paper) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path d='M16 0H0V16' fill='none' stroke='%232F5F92' stroke-opacity='.14'/></svg>")}
 .key-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .key-img .mono{position:absolute;inset:auto 14px 14px;font:500 11px/1.4 var(--f-mono);color:var(--bp-ink)}
 .key-body{padding:22px;display:grid;gap:10px;align-content:start;min-width:0}
@@ -247,7 +247,7 @@ section{scroll-margin-top:80px}
 .key-body ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .key-body li{font:400 11.5px/1 var(--f-mono);padding:6px 8px;border-radius:6px;background:var(--bg-2);border:1px solid var(--rule);color:var(--ink-2)}
 @media (max-width:1000px){.keys{grid-template-columns:1fr}}
-@media (max-width:520px){.key{grid-template-columns:1fr}.key-img{min-height:200px}}
+
 .sub-h{font:400 clamp(22px,2.4vw,30px)/1.2 var(--f-display);margin-bottom:22px}
 
 /* social */
@@ -529,19 +529,19 @@ body.lb-open{overflow:hidden}
 
     <div class="keys">
       <article class="key reveal">
-        <div class="key-img"><img src="img/moy-ritm-site.jpg" alt="ЖК «Мой Ритм», фото с объекта" loading="lazy"></div>
+        <div class="key-img"><img src="img/moy-ritm-render.jpg" alt="ЖК «Мой Ритм»" loading="lazy" style="object-position:50% 40%"></div>
         <div class="key-body"><span class="who">«Ак Барс Дом» · Советский район</span><h3>ЖК «Мой Ритм»</h3><p>Один из самых масштабных проектов комплексного освоения территории в Казани: 36 жилых домов, школы, детские сады и коммерческая инфраструктура.</p><ul><li>монолитные работы</li><li>отделочные работы</li></ul></div>
       </article>
       <article class="key reveal">
-        <div class="key-img"><span class="mono">Кировский район<br>Казань</span></div>
+        <div class="key-img"><img src="img/salavat-kupere.jpg" alt="Микрорайон «Салават Купере», Казань" loading="lazy" style="object-position:50% 60%"></div>
         <div class="key-body"><span class="who">Государственный жилищный фонд при Раисе РТ</span><h3>Микрорайон «Салават Купере»</h3><p>Социально значимый проект комплексной застройки. Работа требовала высокой координации и строгого соблюдения строительных норм и сроков сдачи.</p><ul><li>монолитные работы</li><li>отделочные работы</li></ul></div>
       </article>
       <article class="key reveal">
-        <div class="key-img"><img src="img/moy-ritm-finish.jpg" alt="Подготовка квартиры к отделке" loading="lazy"></div>
+        <div class="key-img"><img src="img/kutuya-corridor.jpg" alt="Чистовая отделка коридора жилого комплекса" loading="lazy"></div>
         <div class="key-body"><span class="who">ГК «РР групп» · Советский район</span><h3>ЖК на ул. Аделя Кутуя, 161, 163</h3><p>Жилой комплекс в развивающейся части Казани. Отвечали за финишное качество: соблюдение технологий, сроков и требований к поверхностям.</p><ul><li>отделочные работы</li></ul></div>
       </article>
       <article class="key reveal">
-        <div class="key-img"><img src="img/airport-demo-1.jpg" alt="Демонтаж старого терминала аэропорта Казани" loading="lazy"></div>
+        <div class="key-img"><img src="img/airport-old-terminal.jpg" alt="Старый терминал аэропорта Казани, чертёж фасада" loading="lazy" style="object-position:20% 50%;background:#000"></div>
         <div class="key-body"><span class="who">Генподрядчик «Ак Таш»</span><h3>Демонтаж старого терминала аэропорта Казани</h3><p>Работы на действующем объекте транспортной инфраструктуры с ограниченным доступом и повышенными требованиями безопасности, в рамках реконструкции и расширения аэропорта.</p><ul><li>демонтажные работы</li></ul></div>
       </article>
     </div>
