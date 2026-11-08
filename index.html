@@ -83,6 +83,8 @@ p{margin:0}
 .nav a{text-decoration:none;color:var(--ink-2);transition:color .2s}
 .nav a:hover{color:var(--ink)}
 .top .btn{padding:11px 18px;font-size:14px}
+.top-phone{font:500 14px/1 var(--f-mono);text-decoration:none;white-space:nowrap}
+@media (max-width:1180px){.top-phone{display:none}}
 .burger{display:none;margin-left:auto;background:none;border:1px solid var(--rule);border-radius:10px;width:42px;height:42px;color:var(--ink);cursor:pointer}
 @media (max-width:980px){
   .nav{display:none;position:absolute;left:0;right:0;top:68px;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--rule);padding:8px var(--gut-r) 16px var(--gut-l)}
@@ -135,7 +137,7 @@ p{margin:0}
 
 /* ---------- stats ---------- */
 .stats{position:relative;padding-block:clamp(56px,7vw,96px);overflow:hidden}
-.stats-bg{position:absolute;inset:0;background:url(img/mesa-river.jpg) center/cover}
+.stats-bg{position:absolute;inset:0;background:url(img/mahabbat.jpg) center/cover}
 .stats-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 30%,transparent),color-mix(in srgb,var(--bg) 55%,transparent))}
 .stats .wrap{position:relative;display:grid;gap:22px}
 .stats-head{padding:22px 26px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;align-items:baseline}
@@ -214,28 +216,45 @@ section{scroll-margin-top:80px}
 @media (max-width:900px){.projects{grid-template-columns:repeat(2,1fr);grid-auto-rows:280px}.projects .pj{grid-column:span 1}.projects .w7,.projects .w8{grid-column:span 2}}
 @media (max-width:520px){.projects{grid-template-columns:1fr}.projects .pj,.projects .w7,.projects .w8{grid-column:span 1}}
 
-/* mesa */
-.mesa{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin-top:clamp(48px,6vw,80px)}
-.mesa-main{position:relative;border-radius:var(--r);overflow:hidden;min-height:440px}
-.mesa-main img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.mesa-main .glass{position:absolute;left:16px;top:16px;max-width:380px;padding:20px 22px;display:grid;gap:10px}
-.mesa-main .glass p{font-size:14.5px;color:var(--ink-2)}
-.mesa-side{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;min-height:440px}
-.mesa-side div{border-radius:var(--r);overflow:hidden;position:relative;min-height:160px}
-.mesa-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.mesa-side .wide{grid-column:span 2}
-@media (max-width:900px){.mesa{grid-template-columns:1fr}.mesa-main,.mesa-side{min-height:360px}}
+/* key objects */
+.feature{display:grid;grid-template-columns:1.1fr 1fr;gap:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--rule);background:var(--bg-2);margin-bottom:16px}
+.feature-img{position:relative;min-height:420px;background:#fff}
+.feature-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.feature-img .tag{position:absolute;top:14px;left:14px}
+.feature-body{padding:clamp(22px,3vw,40px);display:grid;gap:18px;align-content:center;min-width:0}
+.feature-body p{color:var(--ink-2);font-size:15px}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--rule)}
+.facts div{padding:12px 12px 12px 0;border-bottom:1px solid var(--rule);display:grid;gap:2px}
+.facts b{font:400 22px/1.15 var(--f-display)}
+.facts span{font-size:12.5px;color:var(--ink-2)}
+.badge{display:inline-flex;align-items:center;gap:8px;justify-self:start;font:500 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:8px 11px;border-radius:999px;background:var(--btn);color:var(--btn-ink)}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#6FBF73}
+.tlink{font-size:14px;color:var(--ink-2)}
+@media (max-width:860px){.feature{grid-template-columns:1fr}.feature-img{min-height:300px}}
+.keys{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:clamp(48px,6vw,80px)}
+.key{border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;background:var(--bg);display:grid;grid-template-columns:200px 1fr;min-width:0}
+.key-img{position:relative;min-height:220px;background:var(--bp-paper) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path d='M16 0H0V16' fill='none' stroke='%232F5F92' stroke-opacity='.14'/></svg>")}
+.key-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.key-img .mono{position:absolute;inset:auto 14px 14px;font:500 11px/1.4 var(--f-mono);color:var(--bp-ink)}
+.key-body{padding:22px;display:grid;gap:10px;align-content:start;min-width:0}
+.key-body .who{font:500 12px/1.3 var(--f-mono);color:var(--ink-2)}
+.key-body p{font-size:14.5px;color:var(--ink-2)}
+.key-body ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.key-body li{font:400 11.5px/1 var(--f-mono);padding:6px 8px;border-radius:6px;background:var(--bg-2);border:1px solid var(--rule);color:var(--ink-2)}
+@media (max-width:1000px){.keys{grid-template-columns:1fr}}
+@media (max-width:520px){.key{grid-template-columns:1fr}.key-img{min-height:200px}}
+.sub-h{font:400 clamp(22px,2.4vw,30px)/1.2 var(--f-display);margin-bottom:22px}
 
-/* metal */
-.metal{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,4vw,56px);align-items:center}
-.metal-img{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;max-height:560px;width:100%}
-.metal-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.metal-text{display:grid;gap:20px;min-width:0}
-.metal-list{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--rule)}
-.metal-list div{padding:16px 16px 16px 0;border-bottom:1px solid var(--rule);font-size:14.5px;color:var(--ink-2)}
-.metal-list b{display:block;color:var(--ink);font-weight:500;margin-bottom:4px}
-@media (max-width:860px){.metal{grid-template-columns:1fr}.metal-img{aspect-ratio:16/10}}
-@media (max-width:480px){.metal-list{grid-template-columns:1fr}}
+/* social */
+.social{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(24px,4vw,56px);align-items:start}
+.social-text{display:grid;gap:18px}
+.letters{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.letter{margin:0;display:grid;gap:10px}
+.letter img{width:100%;aspect-ratio:7/10;object-fit:cover;border-radius:8px;border:1px solid var(--rule);box-shadow:var(--glass-shadow);background:#fff}
+.letter figcaption{font-size:13px;color:var(--ink-2)}
+.letter b{display:block;color:var(--ink);font-weight:500}
+@media (max-width:860px){.social{grid-template-columns:1fr}}
+@media (max-width:520px){.letters{grid-template-columns:1fr 1fr}}
 
 /* workers */
 .workers{background:#1D2024;color:#E9EAEC;position:relative;overflow:hidden}
@@ -301,6 +320,7 @@ footer a{color:var(--ink-2)}
       <a href="#workers">Вакансии</a>
       <a href="#contacts">Контакты</a>
     </nav>
+    <a class="top-phone" href="tel:+79272442177">+7 (927) 244-21-77</a>
     <a class="btn btn-solid" href="#contacts">Обсудить объект</a>
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 5h14M2 9h14M2 13h14"/></svg>
@@ -325,7 +345,7 @@ footer a{color:var(--ink-2)}
       <div class="hero-facts">
         <span class="chip">СРО · лимит 100 млн ₽</span>
         <span class="chip">ОСНО / НДС</span>
-        <span class="chip">Свой листогибочный цех</span>
+        <span class="chip">Новый объект: ЖК «Сердце мира»</span>
         <span class="chip">235 человек в штате</span>
       </div>
     </div>
@@ -375,7 +395,7 @@ footer a{color:var(--ink-2)}
     <div class="about-text reveal">
       <p class="eyebrow">О компании</p>
       <h2>Результат, который можно предъявить технадзору и покупателю</h2>
-      <p>«Центурион» — строительно-монтажная компания из Казани. С 2012 года выполняем широкий комплекс работ на жилых, коммерческих и инфраструктурных объектах.</p>
+      <p>ООО «Центурион» — строительная организация из Казани. Наш профиль — комплекс строительно-монтажных и отделочных работ на объектах жилой и коммерческой недвижимости. Главное преимущество — опыт работы на знаковых проектах Казани, которые реализуют крупнейшие застройщики республики.</p>
       <p>Мы ориентированы на практический результат: своевременное выполнение работ, понятную организацию процессов, официальное взаимодействие с заказчиком и качество, которое проходит и технический надзор, и приёмку конечным покупателем недвижимости.</p>
       <p>Собственный штат позволяет оперативно распределять ресурсы и контролировать качество и сроки на каждом этапе строительства.</p>
       <div class="team">
@@ -423,7 +443,7 @@ footer a{color:var(--ink-2)}
       <div class="sys-card"><span class="k">Сроки</span><h3>Соблюдение ГПР объекта</h3><p>Встраиваемся в график производства работ и взаимодействуем с технадзором, проектировщиками и смежными подрядчиками.</p></div>
       <div class="sys-card"><span class="k">Допуски</span><h3>СРО с лимитом 100 млн ₽</h3><p>Участвуем в проектах со значительными объёмами работ и ответственностью перед заказчиком.</p></div>
       <div class="sys-card"><span class="k">Финансы</span><h3>ОСНО и НДС</h3><p>Официальный формат работы, полный пакет реквизитов, прозрачные договорные отношения. Подходим для базы подрядчиков крупных заказчиков.</p></div>
-      <div class="sys-card"><span class="k">Производство</span><h3>Собственный листогибочный цех</h3><p>Доборные элементы и фасонные детали под размеры объекта без ожидания сторонних поставщиков.</p></div>
+      <div class="sys-card"><span class="k">Безопасность</span><h3>Опыт на режимных объектах</h3><p>Демонтаж старого терминала аэропорта Казани: ограниченный доступ, требования безопасности, строгий график. Документы по работам предоставляем по запросу в рамках предквалификации.</p></div>
     </div>
 
     <ol class="process process-wrap" aria-label="Порядок работы">
@@ -435,11 +455,13 @@ footer a{color:var(--ink-2)}
     </ol>
 
     <div class="partners">
-      <span class="eyebrow">Работали с</span>
-      <span class="partner">ПСК «АК Барс Строй»</span>
+      <span class="eyebrow">Нам доверяют</span>
+      <span class="partner">«Ак Барс Дом»</span>
+      <span class="partner">Государственный жилищный фонд при Раисе РТ</span>
+      <span class="partner">ГК «РР групп»</span>
+      <span class="partner">«Ак Таш»</span>
       <span class="partner">ПАО «ПИК СЗ»</span>
       <span class="partner">ГК «Точно»</span>
-      <span class="partner">«АК ТАШ»</span>
       <span class="partner">«Татнефть-АЗС Центр»</span>
       <span class="partner">ООО «Корта Консалтинг»</span>
     </div>
@@ -452,11 +474,48 @@ footer a{color:var(--ink-2)}
     <div class="sec-head">
       <p class="eyebrow">Объекты</p>
       <h2>Кейсы и партнёры</h2>
-      <p class="lead">Надёжность подрядчика проверяется выполненными объёмами. Здесь объекты, на которых мы работали с крупнейшими застройщиками региона.</p>
+      <p class="lead">Надёжность подрядчика проверяется выполненными объёмами. Мы работаем на знаковых проектах Казани и Татарстана вместе с крупнейшими застройщиками республики.</p>
     </div>
+
+    <article class="feature reveal">
+      <div class="feature-img"><img src="img/serdce-mira.jpg" alt="ЖК «Сердце мира», Нижнекамск" loading="lazy"></div>
+      <div class="feature-body">
+        <span class="badge">Тендер выигран</span>
+        <h3 style="font-size:clamp(26px,3vw,38px);font-weight:400">ЖК «Сердце мира»</h3>
+        <p>Жилой комплекс бизнес-класса в Нижнекамске на проспекте Мира. Точечная застройка в тихом районе рядом с рощей, закрытый двор и подземный паркинг. Застройщик — СЗ «Мирахаус», генеральный подрядчик — ГК «РР групп».</p>
+        <div class="facts">
+          <div><b>2 секции</b><span>15 и 19 этажей</span></div>
+          <div><b>Бизнес-класс</b><span>подземный паркинг, фитнес-зал</span></div>
+          <div><b>Нижнекамск</b><span>проспект Мира</span></div>
+          <div><b>2 кв. 2029</b><span>плановая выдача ключей</span></div>
+        </div>
+        <a class="tlink" href="https://xn----8sbkdbt1a2afc2d.xn--p1ai/" target="_blank" rel="noopener">Сайт проекта: сердце-мира.рф →</a>
+      </div>
+    </article>
+
+    <div class="keys">
+      <article class="key reveal">
+        <div class="key-img"><img src="img/moy-ritm-site.jpg" alt="ЖК «Мой Ритм», фото с объекта" loading="lazy"></div>
+        <div class="key-body"><span class="who">«Ак Барс Дом» · Советский район</span><h3>ЖК «Мой Ритм»</h3><p>Один из самых масштабных проектов комплексного освоения территории в Казани: 36 жилых домов, школы, детские сады и коммерческая инфраструктура.</p><ul><li>монолитные работы</li><li>отделочные работы</li></ul></div>
+      </article>
+      <article class="key reveal">
+        <div class="key-img"><span class="mono">Кировский район<br>Казань</span></div>
+        <div class="key-body"><span class="who">Государственный жилищный фонд при Раисе РТ</span><h3>Микрорайон «Салават Купере»</h3><p>Социально значимый проект комплексной застройки. Работа требовала высокой координации и строгого соблюдения строительных норм и сроков сдачи.</p><ul><li>монолитные работы</li><li>отделочные работы</li></ul></div>
+      </article>
+      <article class="key reveal">
+        <div class="key-img"><img src="img/moy-ritm-finish.jpg" alt="Подготовка квартиры к отделке" loading="lazy"></div>
+        <div class="key-body"><span class="who">ГК «РР групп» · Советский район</span><h3>ЖК на ул. Аделя Кутуя, 161, 163</h3><p>Жилой комплекс в развивающейся части Казани. Отвечали за финишное качество: соблюдение технологий, сроков и требований к поверхностям.</p><ul><li>отделочные работы</li></ul></div>
+      </article>
+      <article class="key reveal">
+        <div class="key-img"><img src="img/airport-demo-1.jpg" alt="Демонтаж старого терминала аэропорта Казани" loading="lazy"></div>
+        <div class="key-body"><span class="who">Генподрядчик «Ак Таш»</span><h3>Демонтаж старого терминала аэропорта Казани</h3><p>Работы на действующем объекте транспортной инфраструктуры с ограниченным доступом и повышенными требованиями безопасности, в рамках реконструкции и расширения аэропорта.</p><ul><li>демонтажные работы</li></ul></div>
+      </article>
+    </div>
+
+    <h3 class="sub-h">Работали также</h3>
     <div class="projects">
       <figure class="pj w7 reveal" style="margin:0"><img src="img/m14.jpg" alt="Жилой дом в микрорайоне М-14" loading="lazy"><span class="tag">Жильё</span><figcaption class="glass"><b>Микрорайон М-14</b><span>Приволжский район, Казань</span></figcaption></figure>
-      <figure class="pj w5 reveal" style="margin:0"><img src="img/airport.jpg" alt="Терминал Казанского аэропорта" loading="lazy"><span class="tag">Инфраструктура</span><figcaption class="glass"><b>Терминал Казанского аэропорта</b><span>«АК ТАШ»</span></figcaption></figure>
+      <figure class="pj w5 reveal" style="margin:0"><img src="img/airport.jpg" alt="Терминал Казанского аэропорта" loading="lazy"><span class="tag">Инфраструктура</span><figcaption class="glass"><b>Аэропорт Казани</b><span>Новый терминал · «Ак Таш»</span></figcaption></figure>
       <figure class="pj w4 reveal" style="margin:0"><img src="img/mahabbat.jpg" alt="ЖК «Махаббат»" loading="lazy"><span class="tag">Жильё</span><figcaption class="glass"><b>ЖК «Махаббат»</b><span>ПСК «АК Барс Строй»</span></figcaption></figure>
       <figure class="pj w8 reveal" style="margin:0"><img src="img/azs.jpg" alt="АЗС «Татнефть»" loading="lazy" style="object-position:center 40%"><span class="tag">Коммерция</span><figcaption class="glass"><b>АЗС «Татнефть»</b><span>ООО «МКЛ», Казанский филиал «Татнефть-АЗС Центр»</span></figcaption></figure>
       <figure class="pj w4 reveal" style="margin:0"><img src="img/barkli.jpg" alt="Резиденция «Баркли Дан»" loading="lazy"><span class="tag">Премиум</span><figcaption class="glass"><b>Резиденция «Баркли Дан»</b><span>ООО «Корта Консалтинг»</span></figcaption></figure>
@@ -467,40 +526,6 @@ footer a{color:var(--ink-2)}
       <figure class="pj w3 reveal" style="margin:0"><img src="img/azs-inside.jpg" alt="Торговый зал АЗС" loading="lazy"><span class="tag">Коммерция</span><figcaption class="glass"><b>Торговый зал АЗС</b><span>Отделка и инженерные системы</span></figcaption></figure>
     </div>
 
-    <div class="mesa reveal">
-      <div class="mesa-main">
-        <img src="img/mesa-house.jpg" alt="Дом в резиденции «MEŞA»" loading="lazy">
-        <div class="glass">
-          <p class="eyebrow">Собственный проект · ИЖС</p>
-          <h3>Резиденция «MEŞA»</h3>
-          <p>Три дома премиум-класса на первой линии реки Мёша. Готовый продукт, который показывает наш стандарт качества во всех направлениях: от коробки до интерьера.</p>
-          <p>В частном сегменте особенно важны аккуратность, финишное качество и точность исполнения. Эти подходы мы переносим на крупные объекты.</p>
-        </div>
-      </div>
-      <div class="mesa-side">
-        <div class="wide"><img src="img/mesa-river.jpg" alt="Резиденция на берегу реки Мёша" loading="lazy"></div>
-        <div><img src="img/mesa-kitchen.jpg" alt="Кухня-гостиная в доме резиденции" loading="lazy"></div>
-        <div><img src="img/mesa-bedroom.jpg" alt="Спальня в доме резиденции" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= METAL ================= -->
-<section class="sec" style="padding-top:0">
-  <div class="wrap metal">
-    <div class="metal-img reveal"><img src="img/metal.jpg" alt="Листогибочный станок" loading="lazy"></div>
-    <div class="metal-text reveal">
-      <p class="eyebrow">Производство</p>
-      <h2>Собственный листогибочный цех</h2>
-      <p class="lead">Изготавливаем изделия из металла, доборные элементы, фасонные детали и комплектующие под конкретные задачи объекта.</p>
-      <div class="metal-list">
-        <div><b>Без ожидания поставщиков</b>Не ждём сторонних производителей и не подгоняем типовые решения.</div>
-        <div><b>Под размер объекта</b>Когда на площадке нужен нестандартный элемент, изготавливаем его по замерам.</div>
-        <div><b>Меньше простоев</b>Быстрее закрываем вопросы по узлам, примыканиям и нестандартным элементам.</div>
-        <div><b>Управляемость</b>Площадка и производство работают в одной компании, темп работ сохраняется.</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -528,7 +553,7 @@ footer a{color:var(--ink-2)}
       </div>
       <div class="work-item">
         <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 22h22M7 22V9l8-4v17M15 12h8v10"/><path d="M10 12v2M10 17v2M19 15v2"/></svg>
-        <div><h3>Своё производство</h3><p>Листогибочный цех изготавливает доборные элементы под объект. Работа не встаёт из-за ожидания комплектующих.</p></div>
+        <div><h3>Длинные проекты</h3><p>Кварталы комплексного освоения вроде «Мой Ритм» на 36 домов: работа на одной территории на годы вперёд, без постоянных переездов.</p></div>
       </div>
       <div class="work-item">
         <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="6" y="4" width="18" height="22" rx="1.5"/><path d="M10 10h10M10 14h10M10 18h6"/></svg>
@@ -542,11 +567,27 @@ footer a{color:var(--ink-2)}
     <div class="vacancies">
       <p class="eyebrow">Кого ищем</p>
       <div class="vac-list">
-        <span class="vac">Бетонщик</span><span class="vac">Арматурщик</span><span class="vac">Монтажник опалубки</span><span class="vac">Каменщик</span><span class="vac">Кровельщик</span><span class="vac">Гидроизолировщик</span><span class="vac">Электромонтажник</span><span class="vac">Монтажник слаботочных систем</span><span class="vac">Отделочник</span><span class="vac">Оператор листогибочного станка</span><span class="vac">Мастер СМР</span><span class="vac">Инженер ПТО</span>
+        <span class="vac">Бетонщик</span><span class="vac">Арматурщик</span><span class="vac">Монтажник опалубки</span><span class="vac">Каменщик</span><span class="vac">Кровельщик</span><span class="vac">Гидроизолировщик</span><span class="vac">Электромонтажник</span><span class="vac">Монтажник слаботочных систем</span><span class="vac">Отделочник</span><span class="vac">Демонтажник</span><span class="vac">Мастер СМР</span><span class="vac">Инженер ПТО</span>
       </div>
       <div class="hero-cta" style="margin-top:10px">
         <a class="btn btn-solid" href="#contacts" data-topic="job">Откликнуться</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SOCIAL ================= -->
+<section class="sec" id="social">
+  <div class="wrap social">
+    <div class="social-text reveal">
+      <p class="eyebrow">Социальная ответственность</p>
+      <h2>Работаем в Казани и поддерживаем город</h2>
+      <p class="lead">Поддержка местных инициатив для нас не разовая акция, а часть позиции компании. Помогаем спортивным проектам и автомобильному сообществу Татарстана.</p>
+    </div>
+    <div class="letters reveal">
+      <figure class="letter"><img src="img/letter-ops.jpg" alt="Благодарственное письмо Союза СРО «ОПС»" loading="lazy"><figcaption><b>Союз СРО «ОПС»</b>Благодарность за участие в программе по популяризации спорта</figcaption></figure>
+      <figure class="letter"><img src="img/letter-ratibor.jpg" alt="Благодарственное письмо бойцовского клуба «Ратибор»" loading="lazy"><figcaption><b>Бойцовский клуб «Ратибор»</b>Спортивный инвентарь для тренировок</figcaption></figure>
+      <figure class="letter"><img src="img/letter-vazhub.jpg" alt="Благодарственная грамота Vazhub" loading="lazy"><figcaption><b>Сообщество Vazhub</b>Спонсор закрытия сезона 2026</figcaption></figure>
     </div>
   </div>
 </section>
@@ -562,9 +603,9 @@ footer a{color:var(--ink-2)}
     <div class="contact">
       <div class="addr">
         <div><span class="eyebrow">Офис</span><p>г. Казань, ул. Спартаковская, 2, офис 343</p><a href="https://yandex.ru/maps/?text=%D0%9A%D0%B0%D0%B7%D0%B0%D0%BD%D1%8C%2C%20%D1%83%D0%BB.%20%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%2C%202" target="_blank" rel="noopener">Открыть на Яндекс Картах →</a></div>
-        <div><span class="eyebrow">Юридический адрес</span><p>г. Казань, ул. Шаляпина, д. 12, пом. 4</p></div>
-        <div id="contact-lines" hidden><span class="eyebrow">Связь</span><p id="contact-phone"></p><a id="contact-mail"></a></div>
-        <div><span class="eyebrow">На рынке</span><p>с 28 ноября 2012 года</p></div>
+        <div><span class="eyebrow">Юридический адрес</span><p>420049, г. Казань, ул. Шаляпина, д. 12, пом. 4</p></div>
+        <div id="contact-lines" hidden><span class="eyebrow">Связь</span><p><a id="contact-phone" style="font:inherit;color:inherit;text-decoration:none"></a></p><a id="contact-mail"></a></div>
+        <div><span class="eyebrow">Реквизиты</span><p style="font-size:16px">ООО «Центурион»<br>ИНН / КПП 1660177616 / 168401001<br>ОГРН 1121690083470</p></div>
       </div>
       <form class="glass" id="lead" novalidate>
         <div class="field"><span class="eyebrow" style="font-size:11px">Вы</span>
@@ -588,14 +629,14 @@ footer a{color:var(--ink-2)}
 <footer>
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Центурион"><img class="mark" src="img/logo-mark.png" alt="" width="225" height="289"><img class="word" src="img/logo-word.png" alt="Центурион" width="1044" height="136"></a>
-    <span>Строим будущее, создаем ценности! · © 2012–<span id="yr">2026</span></span>
+    <span>ООО «Центурион» · ИНН 1660177616 · © 2012–<span id="yr">2026</span></span>
     <span>designed by <a href="https://t.me/damirenero" target="_blank" rel="noopener">@damirenero</a></span>
   </div>
 </footer>
 
 <script>
 /* ===== Контакты: заполните, и они появятся на сайте, а заявки будут уходить на почту ===== */
-const CONTACTS = { phone: "", email: "" };
+const CONTACTS = { phone: "+7 (927) 244-21-77", email: "centurion.build.co@bk.ru" };
 
 document.documentElement.classList.add('js');
 (function(){
@@ -613,7 +654,7 @@ document.documentElement.classList.add('js');
   // контакты
   if(CONTACTS.phone||CONTACTS.email){
     document.getElementById('contact-lines').hidden=false;
-    document.getElementById('contact-phone').textContent=CONTACTS.phone;
+    const ph=document.getElementById('contact-phone');ph.textContent=CONTACTS.phone;ph.href='tel:'+CONTACTS.phone.replace(/[^\d+]/g,'');
     const m=document.getElementById('contact-mail'); if(CONTACTS.email){m.textContent=CONTACTS.email;m.href='mailto:'+CONTACTS.email}
   }
 
