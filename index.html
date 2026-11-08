@@ -342,6 +342,8 @@ form{padding:28px;display:grid;gap:14px;align-content:start}
 .seg span{display:inline-block;padding:10px 14px;border-radius:999px;border:1px solid var(--rule);font:500 14px/1 var(--f-body);background:var(--bg-2)}
 .seg input:checked+span{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
 .seg input:focus-visible+span{outline:2px solid var(--bp-ink);outline-offset:2px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.btn:disabled{opacity:.6;cursor:wait;transform:none}
 .form-note{font-size:13px;color:var(--ink-2)}
 .form-status{font-size:14px;padding:12px 14px;border-radius:10px;background:var(--bg-2);border:1px solid var(--rule)}
 @media (max-width:860px){.contact{grid-template-columns:1fr}}
@@ -650,6 +652,7 @@ footer a{color:var(--ink-2)}
             <label><input type="radio" name="topic" id="t-job" value="job"><span>Ищу работу</span></label>
           </div>
         </div>
+        <div class="hp" aria-hidden="true"><label for="f-web">Сайт</label><input id="f-web" name="website" tabindex="-1" autocomplete="off"></div>
         <div class="field"><label for="f-name">Имя</label><input id="f-name" name="name" autocomplete="name" required></div>
         <div class="field"><label for="f-phone">Телефон</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7" required></div>
         <div class="field"><label for="f-msg" id="f-msg-label">Объект и объём работ</label><textarea id="f-msg" name="msg" placeholder="Например: монолитные работы, ЖК в Казани, 3 секции, старт весной"></textarea></div>
@@ -763,19 +766,23 @@ document.documentElement.classList.add('js');
   }
   form.addEventListener('change',e=>{if(e.target.name==='topic')setTopic(e.target.value)});
   document.querySelectorAll('[data-topic]').forEach(a=>a.addEventListener('click',()=>setTopic(a.dataset.topic)));
-  form.addEventListener('submit',e=>{
+  form.addEventListener('submit',async e=>{
     e.preventDefault();
     const name=form.name.value.trim(), phone=form.phone.value.trim();
     st.hidden=false;
     if(!name||phone.replace(/\D/g,'').length<10){st.textContent='Укажите имя и телефон, чтобы мы могли перезвонить.';return}
-    const topic=form.topic.value==='job'?'Отклик на вакансию':'Заявка заказчика';
-    const body=`${topic}\nИмя: ${name}\nТелефон: ${phone}\n${form.msg.value.trim()}`;
-    if(CONTACTS.email){
-      location.href=`mailto:${CONTACTS.email}?subject=${encodeURIComponent(topic+' — сайт Центурион')}&body=${encodeURIComponent(body)}`;
-      st.textContent='Открываем почтовую программу. Если она не открылась, напишите нам на '+CONTACTS.email+'.';
-    } else {
-      st.textContent='Приём заявок с сайта настраивается. Пока приходите в офис: ул. Спартаковская, 2, офис 343.';
-    }
+    const btn=form.querySelector('[type="submit"]'); btn.disabled=true; btn.textContent='Отправляем…';
+    st.textContent='Отправляем заявку…';
+    try{
+      const r=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({topic:form.topic.value,name,phone,msg:form.msg.value.trim(),website:form.website.value})});
+      const d=await r.json().catch(()=>({}));
+      if(!r.ok||!d.ok) throw new Error(d.error||'');
+      st.textContent=form.topic.value==='job'?'Спасибо! Заявка отправлена, мы позвоним и пригласим на собеседование.':'Спасибо! Заявка отправлена, мы перезвоним в рабочее время.';
+      form.name.value='';form.phone.value='';form.msg.value='';
+    }catch(err){
+      st.textContent=(err.message||'Не удалось отправить заявку.')+' Позвоните нам: '+CONTACTS.phone+'.';
+    }finally{btn.disabled=false;btn.textContent='Отправить заявку'}
   });
 
   // всплывающая страница вакансий
