@@ -70,3 +70,4 @@ body.ck-open .fab{opacity:0;pointer-events:none}
 .doc h2{font:600 clamp(18px,2.2vw,22px)/1.3 var(--lg-display);margin:32px 0 10px}
 .doc p{margin:0 0 12px;overflow-wrap:anywhere}
 .doc a{color:var(--lg-accent)}
+.ck [hidden],.legalbar [hidden],.site-foot [hidden]{display:none!important}
