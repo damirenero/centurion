@@ -114,8 +114,12 @@ p{margin:0}
 .steps span.on{color:var(--ink)}
 .steps span i{font-style:normal;opacity:.5;margin-right:6px}
 .replay{flex:none;background:var(--btn);color:var(--btn-ink);border:0;border-radius:999px;padding:9px 14px;font:500 12px/1 var(--f-mono);cursor:pointer}
-.stage-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transform:scale(1.04);transition:opacity 1.4s ease,transform 2.4s cubic-bezier(.2,.7,.2,1);pointer-events:none}
-.stage-frame.photo .stage-photo{opacity:1;transform:none}
+.stage-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;clip-path:inset(0 0 100% 0);pointer-events:none}
+.stage-frame.photo .stage-photo{clip-path:none}
+.wipe{position:absolute;left:0;right:0;top:0;height:0;pointer-events:none;opacity:0}
+.wipe.on{opacity:1}
+.wipe::before{content:"";position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(0deg,rgba(141,195,239,.55),rgba(141,195,239,0))}
+.wipe::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#BFE0FA;box-shadow:0 0 12px #8DC3EF}
 @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.stage{max-width:560px;width:100%;justify-self:center}}
 @media (max-width:440px){.steps{gap:10px}.steps span i{display:none}}
 
@@ -378,6 +382,7 @@ footer a{color:var(--ink-2)}
       <div class="stage-frame">
         <svg id="scene" viewBox="0 0 640 720" role="img" aria-label="Анимация: чертёж фасада жилого дома превращается в готовое здание"></svg>
         <img class="stage-photo" id="stage-photo" src="img/hero-photo.jpg" alt="Готовый жилой дом" width="1024" height="1024">
+        <div class="wipe" id="wipe" aria-hidden="true"></div>
       </div>
         <div class="stage-bar glass">
           <div class="steps" id="steps">
@@ -505,7 +510,7 @@ footer a{color:var(--ink-2)}
       <div class="feature-body">
         <span class="badge">Тендер выигран</span>
         <h3 style="font-size:clamp(26px,3vw,38px);font-weight:400">ЖК «Сердце мира»</h3>
-        <p>Жилой комплекс бизнес-класса в Нижнекамске на проспекте Мира. Точечная застройка в тихом районе рядом с рощей, закрытый двор и подземный паркинг. Застройщик — СЗ «Мирахаус», генеральный подрядчик — ГК «РР групп».</p>
+        <p>Жилой комплекс бизнес-класса в Нижнекамске на проспекте Мира. Точечная застройка в тихом районе рядом с рощей, закрытый двор и подземный паркинг.</p>
         <div class="facts">
           <div><b>2 секции</b><span>15 и 19 этажей</span></div>
           <div><b>Бизнес-класс</b><span>подземный паркинг, фитнес-зал</span></div>
@@ -657,11 +662,11 @@ footer a{color:var(--ink-2)}
   </div>
 </footer>
 
-<a class="fab fab-l away" href="#contacts" data-topic="client" aria-label="Заказчикам: оставить заявку">
+<a class="fab fab-l" href="#contacts" data-topic="client" aria-label="Заказчикам: оставить заявку">
   <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6M9 10h.01M15 10h.01"/></svg></span>
   <span>Заказчикам<small>обсудить объект</small></span>
 </a>
-<a class="fab fab-r away" href="#contacts" data-topic="job" aria-label="Соискателям: откликнуться на вакансию">
+<a class="fab fab-r" href="#contacts" data-topic="job" aria-label="Соискателям: откликнуться на вакансию">
   <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M2.5 15h19v2.5h-19z"/><path d="M10 7.2V5h4v2.2"/></svg></span>
   <span>Соискателям<small>работа на объектах</small></span>
 </a>
@@ -685,6 +690,14 @@ document.documentElement.classList.add('js');
   let y=now.getFullYear()-f.getFullYear(); if(now<new Date(now.getFullYear(),10,28)) y--;
   document.getElementById('years').textContent=y;
   document.getElementById('yr').textContent=now.getFullYear();
+
+  // логотип возвращает в самое начало страницы
+  document.querySelectorAll('a[href="#top"]').forEach(l=>l.addEventListener('click',e=>{
+    e.preventDefault();
+    window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    if(location.hash) history.replaceState(null,'',location.pathname+location.search);
+  }));
+  if(location.hash==='#top'){history.replaceState(null,'',location.pathname+location.search);window.scrollTo(0,0)}
 
   // меню
   const b=document.getElementById('burger'), n=document.getElementById('nav');
@@ -737,10 +750,9 @@ document.documentElement.classList.add('js');
 
   // плавающие кнопки прячутся, когда открыт блок контактов
   if('IntersectionObserver' in window){
-    const fabs=document.querySelectorAll('.fab'); let inHero=true, inContacts=false;
-    const upd=()=>fabs.forEach(f=>f.classList.toggle('away',inHero||inContacts));
+    const fabs=document.querySelectorAll('.fab'); let inContacts=false;
+    const upd=()=>fabs.forEach(f=>f.classList.toggle('away',inContacts));
     new IntersectionObserver(([e])=>{inContacts=e.isIntersecting;upd()},{threshold:.15}).observe(document.getElementById('contacts'));
-    new IntersectionObserver(([e])=>{inHero=e.isIntersecting;upd()},{threshold:.45}).observe(document.querySelector('.hero'));
   }
 
   // появление блоков (исходно всё видно; прячем только то, что ниже экрана)
@@ -960,7 +972,9 @@ document.documentElement.classList.add('js');
   const setStep=i=>steps.forEach((s,k)=>s.classList.toggle('on',k===i));
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   let timers=[],raf=0;
-  const frame=svg.parentElement;
+  const frame=svg.parentElement, photo=document.getElementById('stage-photo'), wipe=document.getElementById('wipe');
+  function setWipe(p){photo.style.clipPath=p>=1?'none':`inset(0 0 ${(100-p*100).toFixed(2)}% 0)`;wipe.style.top=(p*100).toFixed(2)+'%'}
+  function resetPhoto(){frame.classList.remove('photo');photo.style.clipPath='';wipe.classList.remove('on');wipe.style.top='0%'}
   const later=(fn,ms)=>timers.push(setTimeout(fn,ms));
   function setScan(y){
     cr.setAttribute('y',y);cr.setAttribute('height',H-y);
@@ -971,11 +985,11 @@ document.documentElement.classList.add('js');
     const m=Math.max(0,(GROUND-y)/ (GROUND-ROOF) * 50.4);
     scanTag.textContent='+'+m.toFixed(3);
   }
-  function finalState(){svg.classList.add('draw','lit');svg.classList.remove('scanning','reset');setScan(0);frame.classList.add('photo');setStep(2)}
-  function blueprintState(){svg.classList.add('draw');svg.classList.remove('lit','scanning','reset');setScan(H);frame.classList.remove('photo');setStep(0)}
+  function finalState(){svg.classList.add('draw','lit');svg.classList.remove('scanning','reset');setScan(0);frame.classList.add('photo');photo.style.clipPath='none';setStep(2)}
+  function blueprintState(){svg.classList.add('draw');svg.classList.remove('lit','scanning','reset');setScan(H);resetPhoto();setStep(0)}
   function run(){
     timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf);
-    svg.classList.add('reset');frame.classList.remove('photo');
+    svg.classList.add('reset');resetPhoto();
     later(()=>{
       svg.classList.remove('draw','lit','scanning');setScan(H);setStep(0);
       void svg.getBoundingClientRect();
@@ -990,7 +1004,13 @@ document.documentElement.classList.add('js');
         setScan(from+(to-from)*p);
         if(p<1)raf=requestAnimationFrame(tick);
         else{svg.classList.remove('scanning');svg.classList.add('lit');
-          later(()=>{frame.classList.add('photo');setStep(2)},1600)}
+          later(()=>{
+            setStep(2);wipe.classList.add('on');
+            const w0=performance.now(),wd=2800;
+            const wt=now=>{let q=Math.min(1,(now-w0)/wd);q=q<.5?2*q*q:1-Math.pow(-2*q+2,2)/2;setWipe(q);
+              if(q<1)raf=requestAnimationFrame(wt);else{wipe.classList.remove('on');frame.classList.add('photo')}};
+            raf=requestAnimationFrame(wt);
+          },1400)}
       };
       raf=requestAnimationFrame(tick);
     },450+3400);
