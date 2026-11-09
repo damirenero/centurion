@@ -1,7 +1,7 @@
 /* Cookie-баннер «Центурион». Аналитика (Яндекс Метрика) запускается только после согласия.
    Чтобы подключить Метрику, впишите номер счётчика в METRIKA_ID. */
 (function(){
-  var METRIKA_ID = '113843617'; // счётчик Яндекс Метрики
+  var METRIKA_ID = ''; // счётчик 113843617 подключён напрямую в <head> страниц
   var KEY = 'centurion-cookie-consent';
   function read(){ try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e){ return null; } }
   function save(v){ try { localStorage.setItem(KEY, JSON.stringify(v)); } catch(e){} }
