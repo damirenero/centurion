@@ -7,7 +7,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#17191C">
-<meta name="description" content="Строительно-монтажная компания «Центурион», Казань, с 2012 года. Монолит, кладка, кровля, гидроизоляция, инженерные сети, отделка — в одном контуре ответственности.">
+<meta name="description" content="Строительно-монтажная компания «Центурион», Казань, с 2012 года. Монолит, кладка, кровля, гидроизоляция, отделка, проектирование. Участвуете в Строительной неделе БРИКС в Казани? Договоримся о встрече.">
 <link rel="icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -140,6 +140,18 @@ p{margin:0}
 #scene .scan text{font:500 10px var(--f-mono);fill:#fff}
 #scene .fadeable{transition:opacity .5s}
 #scene.reset .fadeable{opacity:0}
+
+/* ---------- BRICS ---------- */
+.brics{padding-block:clamp(8px,2vw,16px) clamp(40px,5vw,64px)}
+.brics-card{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(20px,3vw,40px);align-items:center;padding:clamp(22px,3vw,36px);border-radius:16px;border:1px solid var(--glass-brd);background:linear-gradient(120deg,color-mix(in srgb,var(--glow) 18%,var(--bg-2)),var(--bg-2) 60%);position:relative;overflow:hidden}
+.brics-date{display:grid;justify-items:center;gap:2px;padding:16px 18px;border:1px solid var(--rule);border-radius:12px;background:var(--bg);min-width:120px;text-align:center}
+.brics-date b{font:300 40px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.brics-date span{font:500 11px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.brics-text{display:grid;gap:12px;min-width:0}
+.brics-text h2{font-size:clamp(26px,3.2vw,40px);line-height:1.12}
+.brics-text p{color:var(--ink-2);max-width:62ch}
+.brics-cta{display:grid;gap:10px;justify-items:stretch}
+@media (max-width:900px){.brics-card{grid-template-columns:1fr}.brics-date{justify-self:start;grid-auto-flow:column;align-items:baseline;gap:10px}.brics-cta{justify-items:start}}
 
 /* ---------- stats ---------- */
 .stats{position:relative;padding-block:clamp(56px,7vw,96px);overflow:hidden}
@@ -404,6 +416,24 @@ body.lb-open{overflow:hidden}
           </div>
           <button class="replay" id="replay" type="button">Повторить</button>
         </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BRICS ================= -->
+<section class="brics" id="brics" aria-labelledby="brics-h">
+  <div class="wrap">
+    <div class="brics-card">
+      <div class="brics-date"><b>10–13</b><span>ноября 2026<br>Казань Экспо</span></div>
+      <div class="brics-text">
+        <p class="eyebrow">Международная строительная неделя БРИКС</p>
+        <h2 id="brics-h">Участвуете в Строительной неделе БРИКС в Казани?</h2>
+        <p>Если вы застройщик, девелопер или генподрядчик и будете на неделе в «Казань Экспо», давайте встретимся. Обсудим ваши объекты и расскажем, какие разделы стройки возьмём на себя: монолит, кладку, кровлю, гидроизоляцию, отделку и проектирование.</p>
+      </div>
+      <div class="brics-cta">
+        <a class="btn btn-solid" href="#contacts" data-topic="client" data-msg="Строительная неделя БРИКС: хочу договориться о встрече">Договориться о встрече</a>
+        <a class="btn btn-ghost" href="tel:+79272442177">+7 (927) 244-21-77</a>
+      </div>
     </div>
   </div>
 </section>
@@ -763,7 +793,7 @@ document.documentElement.classList.add('js');
   }
   function setTopic(t,message){document.getElementById(t==='job'?'t-job':'t-client').checked=true;loadForm(t,message)}
   lead.addEventListener('change',e=>{if(e.target.name==='topic')setTopic(e.target.value)});
-  document.querySelectorAll('[data-topic]').forEach(a=>a.addEventListener('click',()=>setTopic(a.dataset.topic)));
+  document.querySelectorAll('[data-topic]').forEach(a=>a.addEventListener('click',()=>setTopic(a.dataset.topic,a.dataset.msg)));
   loadForm('client');
 
   // всплывающая страница вакансий
