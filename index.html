@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Центурион — строительная компания</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#17191C">
 <meta name="description" content="Строительно-монтажная компания «Центурион», Казань, с 2012 года. Монолит, кладка, кровля, гидроизоляция, инженерные сети, отделка — в одном контуре ответственности.">
 <link rel="icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,10 +39,10 @@
   --gut-l:max(16px, env(safe-area-inset-left, 0px));
   --gut-r:max(16px, env(safe-area-inset-right, 0px));
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+:root{
   --bg:#17191C; --bg-2:#1E2125; --ink:#E7E8EA; --ink-2:#A3A8AF; --line:#C9CDD2; --rule:rgba(230,232,235,.14);
   --glass:rgba(36,39,44,.62); --glass-brd:rgba(255,255,255,.10); --glass-shadow:0 18px 40px -18px rgba(0,0,0,.7);
-  --glow:#3B6E9A; --bp-ink:#8FB8E6; --bp-paper:#1B2128; --btn:#E7E8EA; --btn-ink:#17191C; color-scheme:dark}}
+  --glow:#3B6E9A; --bp-ink:#8FB8E6; --bp-paper:#1B2128; --btn:#E7E8EA; --btn-ink:#17191C; color-scheme:dark}
 :root[data-theme="dark"]{
   --bg:#17191C; --bg-2:#1E2125; --ink:#E7E8EA; --ink-2:#A3A8AF; --line:#C9CDD2; --rule:rgba(230,232,235,.14);
   --glass:rgba(36,39,44,.62); --glass-brd:rgba(255,255,255,.10); --glass-shadow:0 18px 40px -18px rgba(0,0,0,.7);
@@ -78,8 +80,7 @@ p{margin:0}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
 .brand .mark{height:38px;width:auto}
 .brand .word{height:15px;width:auto}
-:root[data-theme="dark"] .brand .word{filter:invert(1)}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand .word{filter:invert(1)}}
+.brand .word{filter:invert(1)}
 .nav{display:flex;gap:26px;margin-left:auto;font-size:14px}
 .nav a{text-decoration:none;color:var(--ink-2);transition:color .2s}
 .nav a:hover{color:var(--ink)}
@@ -754,7 +755,7 @@ document.documentElement.classList.add('js');
   // форма
   const lead=document.getElementById('lead'), yaform=document.getElementById('yaform');
   const FORM_URL='https://forms.yandex.ru/u/6af0c5956d2d736555e02628/';
-  const isDark=()=>{const t=document.documentElement.dataset.theme;return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches};
+  const isDark=()=>true; // сайт всегда в тёмной палитре
   function loadForm(topic,message){
     const q=new URLSearchParams({iframe:'1',theme:isDark()?'dark':'light',topic:topic==='job'?'Соискатель':'Заказчик'});
     if(message) q.set('message',message);
