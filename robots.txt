@@ -23,4 +23,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://centurion-lovat.vercel.app/sitemap.xml
+Sitemap: https://sk-centurion.ru/sitemap.xml

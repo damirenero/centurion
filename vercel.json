@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "centurion-lovat.vercel.app" }], "destination": "https://sk-centurion.ru/:path*", "permanent": true }
+  ]
+}
