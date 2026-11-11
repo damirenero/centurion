@@ -124,7 +124,7 @@ python3 -m http.server 8080
 Перенаправления настроены в **Vercel → Project → Settings → Domains** (кнопка Edit у домена → Redirect to Another Domain).
 Правило в `vercel.json` для старого адреса оставлено как запасное, но фактически работает настройка домена в Vercel.
 
-Почта на домене — Рег.ру «Почта-1» (услуга u3721402, бесплатно по Рег.решению до 11.11.2027, далее платно): ящик `info@sk-centurion.ru`, веб-почта https://mail.hosting.reg.ru. В зоне `sk-centurion.ru` её записи: MX `mxs1.reg.ru` / `mxs2.reg.ru`, TXT SPF, DMARC, DKIM — не удалять.
+Почта на домене — Рег.ру «Почта-1» (услуга u3721402, бесплатно по Рег.решению до 11.11.2027, далее платно): ящик `info@sk-centurion.ru`. В зоне `sk-centurion.ru` её записи: MX `mxs1.reg.ru` / `mxs2.reg.ru`, TXT SPF, DMARC, DKIM — не удалять.
 
 DNS у обоих доменов — на бесплатных серверах Рег.ру (`ns1.reg.ru`, `ns2.reg.ru`). Записи одинаковые:
 
